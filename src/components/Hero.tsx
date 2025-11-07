@@ -9,14 +9,11 @@ export const Hero = () => {
 
   return (
     <section className="relative h-screen overflow-hidden">
-      {/* Fixed Background */}
+      {/* Static Background - works on all devices */}
       <div
-        className="absolute inset-0 w-full h-full"
+        className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: `url(${heroImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed",
         }}
       />
 
