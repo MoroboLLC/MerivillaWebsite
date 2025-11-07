@@ -1,37 +1,22 @@
-import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Smartphone } from "lucide-react";
 import heroImage from "@/assets/hero-merida.jpg";
 
 export const Hero = () => {
-  const parallaxRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (parallaxRef.current) {
-        const scrolled = window.scrollY;
-        parallaxRef.current.style.transform = `translateY(${scrolled * 0.5}px)`;
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   const scrollToProjects = () => {
     document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <section className="relative h-screen overflow-hidden">
-      {/* Parallax Background */}
+      {/* Fixed Background */}
       <div
-        ref={parallaxRef}
-        className="absolute inset-0 w-full h-[120vh]"
+        className="absolute inset-0 w-full h-full"
         style={{
           backgroundImage: `url(${heroImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
+          backgroundAttachment: "fixed",
         }}
       />
 
