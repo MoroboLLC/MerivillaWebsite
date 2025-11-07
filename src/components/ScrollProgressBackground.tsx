@@ -6,7 +6,8 @@ export const ScrollProgressBackground = () => {
   useEffect(() => {
     const handleScroll = () => {
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = (window.scrollY / totalHeight) * 100;
+      const SPEED = 1.6; // accelerate build progression
+      const progress = ((window.scrollY * SPEED) / totalHeight) * 100;
       setScrollProgress(Math.min(progress, 100));
     };
 

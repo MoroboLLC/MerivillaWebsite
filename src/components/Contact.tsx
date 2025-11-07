@@ -56,7 +56,7 @@ export const Contact = () => {
     <section
       id="contact"
       ref={sectionRef}
-      className="py-24 md:py-32 bg-background relative overflow-hidden"
+      className="py-24 md:py-32 relative overflow-hidden bg-transparent"
     >
       {/* Decorative Elements */}
       <div className="absolute top-20 left-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />

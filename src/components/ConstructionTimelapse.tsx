@@ -65,7 +65,7 @@ export const ConstructionTimelapse = () => {
   return (
     <section
       ref={sectionRef}
-      className="py-24 md:py-32 gradient-sky relative overflow-hidden"
+      className="py-24 md:py-32 relative overflow-hidden bg-transparent"
     >
       <div className="container mx-auto px-4">
         <div
