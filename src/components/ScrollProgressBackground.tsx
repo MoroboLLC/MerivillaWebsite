@@ -23,7 +23,7 @@ export const ScrollProgressBackground = () => {
   };
 
   return (
-    <div className="fixed inset-0 -z-10 bg-background transition-colors duration-1000 overflow-hidden">
+    <div className="fixed inset-0 z-0 bg-background transition-colors duration-1000 overflow-hidden pointer-events-none">
       {/* Stage 1: Ground foundation (0-20%) */}
       <div
         style={{ opacity: getStageOpacity(0, 20) }}

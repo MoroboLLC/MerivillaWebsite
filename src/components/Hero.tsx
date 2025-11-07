@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Smartphone } from "lucide-react";
 import heroImage from "@/assets/hero-merida.jpg";
 
 export const Hero = () => {
@@ -91,10 +91,15 @@ export const Hero = () => {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Scroll Indicator - Mouse on Desktop, Phone on Mobile */}
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-float z-30">
-        <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
+        {/* Desktop Mouse */}
+        <div className="hidden md:flex w-6 h-10 border-2 border-white/50 rounded-full justify-center">
           <div className="w-1.5 h-3 bg-white/70 rounded-full mt-2 animate-pulse" />
+        </div>
+        {/* Mobile Phone */}
+        <div className="md:hidden">
+          <Smartphone className="w-8 h-8 text-white/70 animate-pulse" />
         </div>
       </div>
     </section>

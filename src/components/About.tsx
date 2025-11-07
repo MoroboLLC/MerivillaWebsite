@@ -34,7 +34,6 @@ export const About = () => {
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-[500px] h-[500px] bg-primary/10 morphing-blob blur-[100px]" />
         <div className="absolute bottom-20 right-10 w-[600px] h-[600px] bg-secondary/10 morphing-blob blur-[120px]" style={{ animationDelay: "3s" }} />
-        <div className="absolute top-1/2 right-1/4 w-64 h-64 rounded-[3rem] border-2 border-primary/20 rotate-12 animate-float" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
