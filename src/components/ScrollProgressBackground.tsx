@@ -22,6 +22,12 @@ export const ScrollProgressBackground = () => {
     return (scrollProgress - stageStart) / (stageEnd - stageStart);
   };
 
+  // Dynamic build heights derived from scroll progress (fluid growth)
+  const t = scrollProgress / 100;
+  const mainH = Math.round(100 + t * 420); // central tower
+  const leftH = Math.round(t * 300);       // left wing
+  const rightH = Math.round(t * 260);      // right wing
+
   return (
     <div className="fixed inset-0 z-0 bg-background transition-colors duration-1000 overflow-hidden pointer-events-none">
       {/* Subtle blueprint grid for immediate visibility */}
@@ -39,12 +45,13 @@ export const ScrollProgressBackground = () => {
         style={{ opacity: getStageOpacity(0, 20) }}
         className="absolute inset-0 transition-opacity duration-700"
       >
-        {/* Ground level base */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-deep-ocean/20 via-deep-ocean/10 to-transparent" />
+        {/* Ground level base and shadow */}
+        <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-deep-ocean/30 via-deep-ocean/15 to-transparent" />
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-[780px] h-8 bg-deep-ocean/10 rounded-t-[2rem] border-t border-ocean-blue/20" />
         
-        {/* Foundation footprint - subtle rounded rectangles */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-[600px] h-12 bg-deep-ocean/5 rounded-t-3xl" />
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-[500px] h-8 bg-deep-ocean/8 rounded-t-2xl" />
+        {/* Foundation footprint */}
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-[640px] h-12 bg-deep-ocean/10 rounded-t-[2.5rem]" />
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-[520px] h-9 bg-ocean-blue/15 rounded-t-3xl" />
       </div>
 
       {/* Stage 2: Lower floors emerging (20-40%) */}
@@ -52,15 +59,27 @@ export const ScrollProgressBackground = () => {
         style={{ opacity: getStageOpacity(20, 40) }}
         className="absolute inset-0 transition-opacity duration-700"
       >
-        {/* Building base - first 2 floors */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-[600px] h-32 bg-gradient-to-t from-deep-ocean/15 to-deep-ocean/8 rounded-t-3xl" />
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-[580px] h-28 bg-gradient-to-t from-ocean-blue/10 to-ocean-blue/5 rounded-t-3xl" />
-        
-        {/* Window shadows */}
-        <div className="absolute bottom-24 left-1/2 -translate-x-1/2 flex gap-8">
-          <div className="w-12 h-16 bg-sky-blue/10 rounded-lg" />
-          <div className="w-12 h-16 bg-sky-blue/10 rounded-lg" />
-          <div className="w-12 h-16 bg-sky-blue/10 rounded-lg" />
+        {/* Early structure: central core + wings (dynamic heights) */}
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-[620px]">
+          <div
+            style={{ height: `${Math.min(mainH, 220)}px` }}
+            className="mx-auto w-[420px] bg-gradient-to-t from-deep-ocean/35 via-deep-ocean/20 to-ocean-blue/15 rounded-t-[2.5rem]"
+          />
+          <div
+            style={{ height: `${Math.min(leftH, 140)}px` }}
+            className="absolute bottom-0 left-1/2 -translate-x-[360px] w-40 bg-primary/15 rounded-t-3xl"
+          />
+          <div
+            style={{ height: `${Math.min(rightH, 120)}px` }}
+            className="absolute bottom-0 left-1/2 translate-x-[220px] w-36 bg-secondary/15 rounded-t-3xl"
+          />
+        </div>
+
+        {/* Window shadows (first floors) */}
+        <div className="absolute bottom-28 left-1/2 -translate-x-1/2 grid grid-cols-4 gap-6">
+          {[...Array(8)].map((_, i) => (
+            <div key={i} className="w-12 h-16 bg-sky-blue/15 rounded-md" />
+          ))}
         </div>
       </div>
 
@@ -69,20 +88,43 @@ export const ScrollProgressBackground = () => {
         style={{ opacity: getStageOpacity(40, 60) }}
         className="absolute inset-0 transition-opacity duration-700"
       >
-        {/* Building growing - 4-5 floors */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-[600px] h-64 bg-gradient-to-t from-deep-ocean/20 via-deep-ocean/12 to-deep-ocean/5 rounded-t-[3rem]" />
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-[560px] h-56 bg-gradient-to-t from-ocean-blue/15 via-ocean-blue/8 to-transparent rounded-t-[2.5rem]" />
-        
-        {/* More windows appearing */}
-        <div className="absolute bottom-32 left-1/2 -translate-x-1/2 grid grid-cols-5 gap-6">
-          {[...Array(10)].map((_, i) => (
-            <div key={i} className="w-10 h-12 bg-sky-blue/10 rounded-lg" />
+        {/* Structure grows - more floors */}
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-[620px]">
+          <div
+            style={{ height: `${Math.min(mainH, 360)}px` }}
+            className="mx-auto w-[420px] bg-gradient-to-t from-deep-ocean/40 via-deep-ocean/22 to-deep-ocean/10 rounded-t-[3rem]"
+          />
+          <div
+            style={{ height: `${Math.min(leftH, 220)}px` }}
+            className="absolute bottom-0 left-1/2 -translate-x-[360px] w-44 bg-primary/20 rounded-t-3xl"
+          />
+          <div
+            style={{ height: `${Math.min(rightH, 200)}px` }}
+            className="absolute bottom-0 left-1/2 translate-x-[230px] w-40 bg-secondary/20 rounded-t-3xl"
+          />
+        </div>
+
+        {/* Scaffolding grid overlay */}
+        <div
+          className="absolute bottom-12 left-1/2 -translate-x-1/2"
+          style={{
+            width: 420,
+            height: Math.min(mainH, 360),
+            backgroundImage:
+              "linear-gradient(to right, hsl(var(--ocean-blue) / 0.25) 1px, transparent 1px), linear-gradient(to top, hsl(var(--ocean-blue) / 0.25) 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+            opacity: 0.6,
+            borderTopLeftRadius: '2.5rem',
+            borderTopRightRadius: '2.5rem',
+          }}
+        />
+
+        {/* Windows appearing */}
+        <div className="absolute bottom-32 left-1/2 -translate-x-1/2 grid grid-cols-6 gap-5">
+          {[...Array(18)].map((_, i) => (
+            <div key={i} className="w-10 h-12 bg-sky-blue/20 rounded-md" />
           ))}
         </div>
-        
-        {/* Side structures */}
-        <div className="absolute bottom-16 left-1/2 -translate-x-[350px] w-32 h-40 bg-primary/8 rounded-t-3xl" />
-        <div className="absolute bottom-16 left-1/2 translate-x-[220px] w-32 h-40 bg-secondary/8 rounded-t-3xl" />
       </div>
 
       {/* Stage 4: Upper floors rising (60-80%) */}
@@ -90,22 +132,43 @@ export const ScrollProgressBackground = () => {
         style={{ opacity: getStageOpacity(60, 80) }}
         className="absolute inset-0 transition-opacity duration-700"
       >
-        {/* Taller building - 7-8 floors */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-[600px] h-96 bg-gradient-to-t from-deep-ocean/25 via-deep-ocean/15 to-deep-ocean/5 rounded-t-[4rem]" />
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-[550px] h-[360px] bg-gradient-to-t from-ocean-blue/20 via-ocean-blue/10 to-transparent rounded-t-[3.5rem]" />
-        
-        {/* Full grid of windows */}
-        <div className="absolute bottom-24 left-1/2 -translate-x-1/2 grid grid-cols-6 gap-5">
+        {/* Tower reaches near full height */}
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-[620px]">
+          <div
+            style={{ height: `${Math.min(mainH, 480)}px` }}
+            className="mx-auto w-[420px] bg-gradient-to-t from-deep-ocean/45 via-deep-ocean/25 to-deep-ocean/10 rounded-t-[3.5rem]"
+          />
+          <div
+            style={{ height: `${Math.min(leftH, 280)}px` }}
+            className="absolute bottom-0 left-1/2 -translate-x-[360px] w-48 bg-primary/25 rounded-t-[2.5rem]"
+          />
+          <div
+            style={{ height: `${Math.min(rightH, 240)}px` }}
+            className="absolute bottom-0 left-1/2 translate-x-[240px] w-44 bg-secondary/25 rounded-t-[2.5rem]"
+          />
+        </div>
+
+        {/* Dense windows grid */}
+        <div className="absolute bottom-28 left-1/2 -translate-x-1/2 grid grid-cols-6 gap-4">
           {[...Array(24)].map((_, i) => (
-            <div key={i} className="w-10 h-12 bg-sky-blue/15 rounded-lg" />
+            <div key={i} className="w-10 h-12 bg-sky-blue/25 rounded-md" />
           ))}
         </div>
-        
+
         {/* Rooftop elements emerging */}
-        <div className="absolute bottom-[400px] left-1/2 -translate-x-1/2 w-[500px] h-16 bg-primary/10 rounded-t-3xl" />
-        
-        {/* Ambient lighting */}
-        <div className="absolute bottom-64 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-sun-yellow/8 blur-3xl" />
+        <div className="absolute left-1/2 -translate-x-1/2"
+             style={{ bottom: `${Math.min(12 + mainH, 520)}px` }}>
+          <div className="w-[380px] h-3 bg-primary/30 rounded-full" />
+          <div className="w-[280px] h-2 bg-secondary/30 rounded-full mt-2 mx-auto" />
+        </div>
+
+        {/* Construction crane */}
+        <div className="absolute" style={{ left: 'calc(50% - 380px)', bottom: 12, opacity: 0.9 }}>
+          <div style={{ width: 6, height: Math.min(520, mainH + 60), background: 'hsl(var(--primary) / 0.35)', borderRadius: 2 }} />
+          <div style={{ position: 'absolute', left: -4, bottom: `${Math.min(mainH + 60, 520)}px`, width: 260, height: 6, background: 'hsl(var(--primary) / 0.35)', borderRadius: 2 }} />
+          <div style={{ position: 'absolute', left: 240, bottom: `${Math.min(mainH + 60, 520)}px`, width: 2, height: 120, background: 'hsl(var(--primary) / 0.35)' }} />
+          <div style={{ position: 'absolute', left: 236, bottom: `${Math.min(mainH + 10, 470)}px`, width: 12, height: 12, background: 'hsl(var(--secondary) / 0.6)', borderRadius: 4 }} />
+        </div>
       </div>
 
       {/* Stage 5: Completed building (80-100%) */}
@@ -113,28 +176,43 @@ export const ScrollProgressBackground = () => {
         style={{ opacity: getStageOpacity(80, 100) }}
         className="absolute inset-0 transition-opacity duration-700"
       >
-        {/* Fully built development */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-[600px] h-[500px] bg-gradient-to-t from-deep-ocean/30 via-deep-ocean/20 to-deep-ocean/8 rounded-t-[5rem]" />
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-[540px] h-[480px] bg-gradient-to-t from-ocean-blue/25 via-ocean-blue/15 to-transparent rounded-t-[4.5rem]" />
-        
-        {/* All windows lit up */}
+        {/* Completed development silhouettes */}
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-[620px]">
+          <div
+            style={{ height: `${Math.min(mainH, 520)}px` }}
+            className="mx-auto w-[420px] bg-gradient-to-t from-deep-ocean/50 via-deep-ocean/30 to-deep-ocean/12 rounded-t-[4rem]"
+          />
+          <div
+            style={{ height: `${Math.min(leftH, 300)}px` }}
+            className="absolute bottom-0 left-1/2 -translate-x-[360px] w-52 bg-primary/30 rounded-t-[3rem]"
+          />
+          <div
+            style={{ height: `${Math.min(rightH, 260)}px` }}
+            className="absolute bottom-0 left-1/2 translate-x-[250px] w-48 bg-secondary/30 rounded-t-[3rem]"
+          />
+        </div>
+
+        {/* Windows lit up */}
         <div className="absolute bottom-24 left-1/2 -translate-x-1/2 grid grid-cols-6 gap-4">
           {[...Array(36)].map((_, i) => (
-            <div key={i} className="w-10 h-12 bg-sun-yellow/20 rounded-lg shadow-[0_0_10px_rgba(255,214,10,0.3)]" />
+            <div key={i} className="w-10 h-12 bg-sun-yellow/30 rounded-md shadow-[0_0_12px_hsl(45_95%_55%_/_0.4)]" />
           ))}
         </div>
-        
+
         {/* Rooftop completed */}
-        <div className="absolute bottom-[500px] left-1/2 -translate-x-1/2 w-[600px] h-20 bg-gradient-to-t from-primary/20 to-primary/10 rounded-t-[4rem]" />
-        <div className="absolute bottom-[515px] left-1/2 -translate-x-1/2 w-[500px] h-12 bg-secondary/15 rounded-t-3xl" />
-        
-        {/* Surrounding landscaping */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-[400px] w-64 h-20 bg-sage-green/15 rounded-t-3xl" />
-        <div className="absolute bottom-8 left-1/2 translate-x-[136px] w-64 h-20 bg-sage-green/15 rounded-t-3xl" />
-        
-        {/* Warm ambient glow - building is alive */}
-        <div className="absolute bottom-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full bg-sun-glow/15 blur-[120px] animate-pulse" />
-        
+        <div className="absolute left-1/2 -translate-x-1/2"
+             style={{ bottom: `${Math.min(12 + mainH, 540)}px` }}>
+          <div className="w-[420px] h-3 bg-primary/35 rounded-full" />
+          <div className="w-[320px] h-2 bg-secondary/35 rounded-full mt-2 mx-auto" />
+        </div>
+
+        {/* Landscaping */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-[420px] w-64 h-20 bg-sage-green/25 rounded-t-[2rem]" />
+        <div className="absolute bottom-6 left-1/2 translate-x-[160px] w-64 h-20 bg-sage-green/25 rounded-t-[2rem]" />
+
+        {/* Warm ambient glow */}
+        <div className="absolute bottom-1/3 left-1/2 -translate-x-1/2 w-[720px] h-[520px] rounded-full bg-sun-glow/20 blur-[120px] animate-pulse" />
+
         {/* Sky gradient at completion */}
         <div className="absolute inset-0 bg-gradient-to-b from-sky-blue/10 via-transparent to-transparent" />
       </div>
