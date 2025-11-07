@@ -36,7 +36,7 @@ export const Hero = () => {
       />
 
       {/* Gradient Overlay with Abstract Shapes */}
-      <div className="absolute inset-0 bg-gradient-to-br from-deep-ocean/95 via-ocean-blue/90 to-primary/85" />
+      <div className="absolute inset-0 bg-gradient-to-br from-deep-ocean/60 via-ocean-blue/50 to-primary/40" />
       
       {/* Large Floating Abstract Blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">

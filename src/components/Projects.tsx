@@ -56,7 +56,7 @@ export const Projects = () => {
     <section
       id="projects"
       ref={sectionRef}
-      className="py-16 md:py-24 lg:py-32 relative overflow-hidden bg-gradient-to-b from-background via-primary/5 to-background"
+      className="py-16 md:py-24 lg:py-32 relative overflow-hidden bg-gradient-to-b from-transparent via-primary/10 to-transparent"
     >
       {/* Large Abstract Shapes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">

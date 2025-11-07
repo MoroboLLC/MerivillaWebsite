@@ -24,6 +24,16 @@ export const ScrollProgressBackground = () => {
 
   return (
     <div className="fixed inset-0 z-0 bg-background transition-colors duration-1000 overflow-hidden pointer-events-none">
+      {/* Subtle blueprint grid for immediate visibility */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, hsl(var(--ocean-blue) / 0.15) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--ocean-blue) / 0.15) 1px, transparent 1px)",
+          backgroundSize: "48px 48px",
+          opacity: 0.15,
+        }}
+      />
       {/* Stage 1: Ground foundation (0-20%) */}
       <div
         style={{ opacity: getStageOpacity(0, 20) }}

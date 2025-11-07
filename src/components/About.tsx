@@ -28,7 +28,7 @@ export const About = () => {
   return (
     <section
       ref={sectionRef}
-      className="py-16 md:py-24 lg:py-32 relative overflow-hidden bg-gradient-to-br from-background via-sky-blue/30 to-background"
+      className="py-16 md:py-24 lg:py-32 relative overflow-hidden bg-gradient-to-br from-transparent via-sky-blue/20 to-transparent"
     >
       {/* Abstract Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
