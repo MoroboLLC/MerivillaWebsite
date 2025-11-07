@@ -56,19 +56,29 @@ export const Projects = () => {
     <section
       id="projects"
       ref={sectionRef}
-      className="py-24 md:py-32 bg-background"
+      className="py-24 md:py-32 relative overflow-hidden bg-gradient-to-b from-background via-primary/5 to-background"
     >
-      <div className="container mx-auto px-4">
+      {/* Large Abstract Shapes */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-sun-yellow/10 rounded-full blur-[150px]" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-ocean-blue/10 rounded-full blur-[120px]" />
+        <div className="absolute top-1/2 left-1/3 w-96 h-96 bg-secondary/5 morphing-blob blur-[100px]" />
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <div
-          className={`text-center mb-16 transition-all duration-1000 ${
+          className={`text-center mb-20 transition-all duration-1000 ${
             isVisible
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-10"
           }`}
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-gradient-ocean">
-            Featured Developments
-          </h2>
+          <div className="inline-block relative mb-6">
+            <div className="absolute -inset-12 bg-gradient-to-r from-ocean-blue/10 via-sun-yellow/10 to-ocean-blue/10 rounded-[4rem] blur-3xl" />
+            <h2 className="text-5xl md:text-7xl font-bold text-gradient-ocean relative z-10">
+              Featured Developments
+            </h2>
+          </div>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Discover our portfolio of exceptional properties designed for those
             who demand the extraordinary

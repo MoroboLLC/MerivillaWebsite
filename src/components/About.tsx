@@ -28,11 +28,14 @@ export const About = () => {
   return (
     <section
       ref={sectionRef}
-      className="py-24 md:py-32 gradient-sky relative overflow-hidden"
+      className="py-24 md:py-32 relative overflow-hidden bg-gradient-to-br from-background via-sky-blue/30 to-background"
     >
-      {/* Decorative Elements */}
-      <div className="absolute top-20 right-10 w-72 h-72 bg-secondary/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 left-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      {/* Abstract Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-[500px] h-[500px] bg-primary/10 morphing-blob blur-[100px]" />
+        <div className="absolute bottom-20 right-10 w-[600px] h-[600px] bg-secondary/10 morphing-blob blur-[120px]" style={{ animationDelay: "3s" }} />
+        <div className="absolute top-1/2 right-1/4 w-64 h-64 rounded-[3rem] border-2 border-primary/20 rotate-12 animate-float" />
+      </div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div
@@ -42,9 +45,13 @@ export const About = () => {
               : "opacity-0 translate-y-10"
           }`}
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-8 text-gradient-ocean">
-            Redefining Luxury Living
-          </h2>
+          <div className="relative inline-block mb-8">
+            <div className="absolute -inset-8 bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10 rounded-[3rem] blur-2xl" />
+            <h2 className="text-5xl md:text-7xl font-bold text-gradient-ocean relative z-10">
+              Redefining Luxury Living
+            </h2>
+            <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-transparent via-sun-yellow to-transparent" />
+          </div>
           <div className="space-y-6 text-lg md:text-xl text-foreground/80 leading-relaxed">
             <p className="font-medium">
               McCarthy Development specializes in creating extraordinary real
