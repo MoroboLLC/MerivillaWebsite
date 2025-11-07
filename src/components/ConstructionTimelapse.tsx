@@ -84,7 +84,11 @@ export const ConstructionTimelapse = () => {
             </p>
           </div>
 
-          <div className="glass-effect rounded-3xl overflow-hidden shadow-strong">
+          {/* Abstract decorative blobs */}
+          <div className="absolute -top-20 -left-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+          <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-secondary/5 rounded-full blur-3xl" />
+          
+          <div className="glass-effect rounded-[2.5rem] overflow-hidden shadow-strong relative z-10 border border-white/10">
             <div className="relative">
               {/* Main Image */}
               <div
@@ -108,10 +112,13 @@ export const ConstructionTimelapse = () => {
 
               {/* Play/Pause Button */}
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                {/* Pulsing ring effect around button */}
+                <div className="absolute inset-0 w-20 h-20 rounded-full bg-secondary/30 animate-ping" />
+                
                 <Button
                   onClick={togglePlay}
                   size="lg"
-                  className="w-20 h-20 rounded-full bg-secondary hover:bg-secondary/90 shadow-glow transition-smooth group"
+                  className="relative w-20 h-20 rounded-full bg-secondary hover:bg-secondary/90 hover:scale-110 shadow-glow transition-smooth group"
                 >
                   {isPlaying ? (
                     <Pause className="h-8 w-8 group-hover:scale-110 transition-smooth" />

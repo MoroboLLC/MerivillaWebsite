@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
+import { ArrowRight } from "lucide-react";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
@@ -26,8 +27,8 @@ const projects = [
 ];
 
 export const Projects = () => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -76,45 +77,43 @@ export const Projects = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
-            <Card
+            <div
               key={index}
-              className={`group overflow-hidden border-0 shadow-medium hover:shadow-strong transition-all duration-500 cursor-pointer ${
-                isVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-10"
-              }`}
-              style={{ transitionDelay: `${index * 150}ms` }}
+              className="group cursor-pointer animate-fade-in relative"
+              style={{ animationDelay: `${index * 0.2}s` }}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
-              <div className="relative h-72 overflow-hidden">
+              {/* Abstract hover glow */}
+              <div 
+                className={`absolute -inset-4 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-[2.5rem] blur-2xl transition-opacity duration-500 ${
+                  hoveredIndex === index ? "opacity-100" : "opacity-0"
+                }`}
+              />
+              
+              <div className="relative overflow-hidden rounded-[2rem] shadow-strong transition-smooth hover:shadow-glow transform hover:-translate-y-2">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className={`w-full h-full object-cover transition-transform duration-700 ${
-                    hoveredIndex === index ? "scale-110" : "scale-100"
-                  }`}
+                  className="w-full h-80 object-cover transition-smooth group-hover:scale-110"
                 />
-                <div
-                  className={`absolute inset-0 gradient-hero transition-opacity duration-500 ${
-                    hoveredIndex === index ? "opacity-70" : "opacity-30"
-                  }`}
-                />
-                <div className="absolute top-4 right-4">
-                  <span className="glass-effect px-4 py-2 rounded-full text-sm font-semibold text-white">
-                    {project.status}
-                  </span>
+                
+                {/* Abstract shape overlay */}
+                <div className="absolute top-4 right-4 w-24 h-24 bg-sun-yellow/20 rounded-full blur-2xl group-hover:scale-150 transition-smooth" />
+                
+                <div className="absolute inset-0 bg-gradient-to-t from-deep-ocean via-deep-ocean/50 to-transparent opacity-60 group-hover:opacity-80 transition-smooth" />
+                <div className="absolute bottom-0 left-0 right-0 p-8 text-white transform transition-smooth group-hover:translate-y-0 translate-y-2">
+                  <h3 className="text-3xl font-bold mb-2">{project.title}</h3>
+                  <p className="text-lg opacity-90 mb-4">{project.description}</p>
+                  <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-smooth">
+                    <span className="text-sm font-semibold bg-secondary text-secondary-foreground px-4 py-2 rounded-full">
+                      Explore Project
+                    </span>
+                    <ArrowRight className="h-4 w-4" />
+                  </div>
                 </div>
               </div>
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-bold mb-3 text-primary group-hover:text-gradient-ocean transition-all">
-                  {project.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {project.description}
-                </p>
-              </CardContent>
-            </Card>
+            </div>
           ))}
         </div>
       </div>
