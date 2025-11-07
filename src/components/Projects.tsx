@@ -56,7 +56,7 @@ export const Projects = () => {
     <section
       id="projects"
       ref={sectionRef}
-      className="py-24 md:py-32 relative overflow-hidden bg-gradient-to-b from-background via-primary/5 to-background"
+      className="py-16 md:py-24 lg:py-32 relative overflow-hidden bg-gradient-to-b from-background via-primary/5 to-background"
     >
       {/* Large Abstract Shapes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -73,13 +73,13 @@ export const Projects = () => {
               : "opacity-0 translate-y-10"
           }`}
         >
-          <div className="inline-block relative mb-6">
+          <div className="inline-block relative mb-4 md:mb-6">
             <div className="absolute -inset-12 bg-gradient-to-r from-ocean-blue/10 via-sun-yellow/10 to-ocean-blue/10 rounded-[4rem] blur-3xl" />
-            <h2 className="text-5xl md:text-7xl font-bold text-gradient-ocean relative z-10">
+            <h2 className="text-3xl md:text-5xl lg:text-7xl font-bold text-gradient-ocean relative z-10">
               Featured Developments
             </h2>
           </div>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
             Discover our portfolio of exceptional properties designed for those
             who demand the extraordinary
           </p>
